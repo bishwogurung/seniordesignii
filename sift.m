@@ -8,13 +8,16 @@
 % imshow(Ig)
 
 I = imread('bread.jpg');
-I=rgb2gray(I);
+if size(I, 3)==3
+    I=rgb2gray(I);
+end
 I = imresize(I, 0.1);
 % I = imgaussfilt(I, 2);
 % imshow(I)
 % S = imshow(I)
-imshow(I)
 i=1;
+
+
 % imshow(I)
 % while i~=5
 %     B=imresize(I, 0.5);
