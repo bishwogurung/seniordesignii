@@ -78,7 +78,9 @@ for i=1:max_octave
     DoG_4 = blur_3-blur_4;
     subplot(2,2,4); imshow(DoG_1)
         
-        figure;
+       if i~=5
+           figure;
+       end
 
 
 
