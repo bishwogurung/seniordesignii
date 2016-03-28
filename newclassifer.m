@@ -1,41 +1,18 @@
-%% Image Category Classification Using Bag of Features
-% This example shows how to use a bag of features approach for image
-% category classification. This technique is also often referred to as bag
-% of words. Visual image categorization is a process of assigning a
-% category label to an image under test. Categories may contain images
-% representing just about anything, for example, dogs, cats, trains, boats.
-%
-% Copyright 2014 The MathWorks, Inc. 
-
-%% Download Caltech101 Image Set
-% To learn about bag of features image category classification, you will
-% first download a suitable image data set. One of the most widely cited
-% and used data sets is  <http://www.vision.caltech.edu/Image_Datasets/Caltech101 Caltech 101>, collected by Fei-Fei Li, Marco Andreetto,
-% and Marc 'Aurelio Ranzato.
-
-% Location of the compressed data set
+%hello
 url = 'http://www.vision.caltech.edu/Image_Datasets/Caltech101/101_ObjectCategories.tar.gz';
 % Store the output in a temporary folder
 outputFolder = fullfile(tempdir, 'caltech101'); % define output folder
 
-%%
-% Note that downloading the set from the web can take a very long time depending on
-% your Internet connection. It can be 30 minutes or more since the set contains 
-% 126MB of data. The commands below will block MATLAB for that period of
-% time. Alternatively, you can use your web browser to first download the
-% set to your local disk. If you choose that route, re-point the 'url' variable
-% above to the file that you downloaded.
-
 if ~exist(outputFolder, 'dir') % download only once
     disp('Downloading 126MB Caltech101 data set...');
     untar(url, outputFolder);
-end
+en
 
 %% Load Image Sets
 % Instead of operating on the entire Caltech 101 set, which can be time
 % consuming, use three categories: starfish, rhino, and cup.
 % Note that for the bag of features approach to be effective, majority of
-% each image's area must be occupied by the subject of the category, for
+% each image's area must be occupied by the subject of the cate                                                        gory, for
 % example, an object or a type of scene.
 
 rootFolder = fullfile(outputFolder, '101_ObjectCategories');
@@ -124,11 +101,11 @@ img = read(imgSets(1), 1);
 featureVector = encode(bag, img);
 
 % Plot the histogram of visual word occurrences
-figure
-bar(featureVector)
-title('Visual word occurrences')
-xlabel('Visual word index')
-ylabel('Frequency of occurrence')
+% figure
+% bar(featureVector)
+% title('Visual word occurrences')
+% xlabel('Visual word index')
+% ylabel('Frequency of occurrence')
 
 %%
 % This histogram forms a basis for training a classifier and for the actual
@@ -140,11 +117,6 @@ ylabel('Frequency of occurrence')
 % from the Statistics and Machine Learning Toolbox(TM).
 
 categoryClassifier = trainImageCategoryClassifier(trainingSets, bag);
-
-%%
-% The above function utilizes the |encode| method of the input |bag| object
-% to formulate feature vectors representing each image category from the 
-% |trainingSets| array of imageSet objects.
 
 %% Evaluate Classifier Performance
 % Now that we have a trained classifier, |categoryClassifier|, let's
@@ -165,15 +137,13 @@ confMatrix = evaluate(categoryClassifier, validationSets);
 % Compute average accuracy
 mean(diag(confMatrix));
 
-%%
-% Additional statistics can be derived using the rest of arguments returned
-% by the evaluate function. See help for |imageCategoryClassifier/evaluate|.
-% You can tweak the various parameters and continue evaluating the trained
-% classifier until you are satisfied with the results.
-
 %% Input an unknown image to be categorized by the classifier.
 
-img = imread('C:/Users/James/Documents/MATLAB/101_ObjectCategories/unknown/image_0011.jpg');
+% img = imread('C:/Users/James/Documents/MATLAB/101_ObjectCategories/unknown/image_0011.jpg');
+% img = imread('http://noimpactman.typepad.com/photos/uncategorized/2007/04/15/starfish.jpg');
+% img = imread('test_image1.jpg');
+img = imread('test_image2.jpg');
+
 [labelIdx, scores] = predict(categoryClassifier, img);
 
 % Display the string label
