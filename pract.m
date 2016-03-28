@@ -13,7 +13,7 @@
 % 
 % end
 clearvars
-for i=1:3
+for i=1:4
 %     jpgFileName = strcat('/Users/Bishwo/Downloads/101_ObjectCategories/starfish2/image', num2str(i), '.jpg');
 %     if exist(jpgFileName, 'file')
 % %         clearvars
