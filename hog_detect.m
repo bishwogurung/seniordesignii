@@ -31,10 +31,13 @@ img = im2single(im);
 
 
 
-
-
-cellSize = 8 ;
-hog = vl_hog(im, cellSize, 'verbose') ;
-
-imhog = vl_hog('render', hog, 'verbose') ;
-clf ; imagesc(imhog) ; colormap gray ;
+% 
+% 
+% cellSize = 8 ;
+% hog = vl_hog(im, cellSize, 'verbose') ;
+% 
+% imhog = vl_hog('render', hog, 'verbose') ;
+% clf ; imagesc(imhog) ; colormap gray ;
+clearvars
+img = imread('bread.jpg');
+imshow(img)
