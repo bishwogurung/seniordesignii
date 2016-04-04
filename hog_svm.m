@@ -9,14 +9,14 @@ minSetCount = min([imgSets.Count]);
 imgSets = partition(imgSets, minSetCount, 'randomize');
 
 % for image = 1:numel(imgSets)
-%     image = imresize(image, [20 20]);
+% %     image = imresize(image, [20 20]);
 % end
-    %numel - total number of array elements
+%     %numel - total number of array elements
 
-[trainingSets, testSets] = partition(imgSets, 0.6, 'randomize');
+[trainingSets, testSets] = partition(imgSets, 0.3, 'randomize');
 
-
-img = read(trainingSets(3), 33);
+img = read(trainingSets(1), 2);
+train_img_size = size(img);
 
 % Extract HOG features and HOG visualization
 [hog_2x2, vis2x2] = extractHOGFeatures(img,'CellSize',[2 2]);
@@ -53,20 +53,21 @@ for image = 1:numel(trainingSets)
   
     
     for i = 1:numImages
-        img = rgb2gray(read(trainingSets(image), i));
-        img = imbinarize(img);
+%         img = rgb2gray(read(trainingSets(image), i));
+%         img = imbinarize(img);
         
-% %         img = read(trainingSets(image), i);
-% %         lvl = graythresh(img);
-% %         img = im2bw(img, lvl);
+        img = read(trainingSets(image), i);
+        img = imresize(img, train_img_size);
+        lvl = graythresh(img);
+        img = im2bw(img, lvl);
 %         img = im2single(img);
 
 %         img =imresize(img, [25 25]);
-        first = extractHOGFeatures(img, 'CellSize', cellSize);
-        display('first')
-        size(first)
-        display('hog_4x4')
-        size(hog_4x4)
+%         first = extractHOGFeatures(img, 'CellSize', cellSize);
+%         display('first')
+%         size(first)
+%         display('hog_4x4')
+%         size(hog_4x4)
         features(i, :) = extractHOGFeatures(img, 'CellSize', cellSize);
         size(features)
     end
