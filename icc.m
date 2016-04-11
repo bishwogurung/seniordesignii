@@ -124,4 +124,7 @@ mean(diag(confMatrix));
 img = imread(fullfile(rootFolder, 'starfish', 'image_0010.jpg'));
 [labelIdx, scores] = predict(categoryClassifier, img);
 categoryClassifier.Labels(labelIdx)
+answ = categoryClassifier.Labels(labelIdx);
+answer = ['say ' answ];
+system(answer);
 %gives more information about the image

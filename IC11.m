@@ -29,12 +29,13 @@ url = 'http://www.vision.caltech.edu/Image_Datasets/Caltech101/101_ObjectCategor
 %using the link from the internet 
 
 outputFolder = fullfile(tempdir, 'caltech101'); 
+
 %downloading the caltech files 
 
-if ~exist(outputFolder, 'dir') 
-    disp('Downloading 126MB Caltech101 data set...');
-    untar(url, outputFolder);
-end
+% if ~exist(outputFolder, 'dir') 
+%     disp('Downloading 126MB Caltech101 data set...');
+%     untar(url, outputFolder);
+% end
 %'if' loop incase we re-run our code, this should download the images only once
 
 %% 
@@ -43,6 +44,7 @@ end
 %images.
 
 rootFolder = fullfile(outputFolder, '101_ObjectCategories');
+
 
 %%
 %We selected 3 categories from Caltech 101 by using imageset which pulls
@@ -147,4 +149,7 @@ mean(diag(confMatrix));
 img = imread('img1.jpg');
 [labelIdx, scores] = predict(categoryClassifier, img);
 categoryClassifier.Labels(labelIdx)
+% answ = categoryClassifier.Labels(labelIdx);
+% answer = ['say ' answ];
+% system(answer);
 %gives more information about the image
