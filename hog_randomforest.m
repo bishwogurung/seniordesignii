@@ -32,7 +32,7 @@ minSetCount = min([imgSets.Count]);
 
 imgSets = partition(imgSets, minSetCount, 'randomize');
 
-[trainingSets, testSets] = partition(imgSets, 0.3, 'randomize');
+[trainingSets, testSets] = partition(imgSets, 0.7, 'randomize');
 
 img = read(trainingSets(1), 2);
 train_img_size = [size(img, 1), size(img, 2)];
@@ -45,6 +45,7 @@ hogFeatureSize = length(hog_4x4);
 
 trainingFeatures = [];
 trainingLabels   = [];
+
 
 for pic = 1:numel(trainingSets)
 
@@ -73,18 +74,26 @@ end
 % testpic = imread('test_image1.jpg'); %starfish
 % testpic = imread('http://cdn.history.com/sites/2/2013/12/egyptian-pyramids-hero-H.jpeg'); %pyramid
 testpic = imread('test_image5.jpeg'); %pyramids
-% testpic = imread('img2.jpg');
+% testpic = imread('img2.jpg'); %dollar-bill snapshot from webcam
 % testpic = imread('test_image1.jpg');
 
 testpic = imresize(testpic, train_img_size);
 lvl = graythresh(testpic);
 testpic = im2bw(testpic, lvl);
 [testfeature, testlabelz] = extractHOGFeatures(testpic, 'CellSize', cellSize);
-% testlabel = 'answer';
-% testlabel = cellstr(testlabel);
-% treeModel = TreeBagger(30, trainingFeatures, trainingLabels, 'NumPredictorsToSample', 5);
-treeModel = TreeBagger(30, trainingFeatures, trainingLabels);
+testlabel = 'answer';
+testlabel = cellstr(testlabel);
 
+% paroptions = statset('UseParallel', true);
+tic
+% treeModel = TreeBagger(30, trainingFeatures, trainingLabels, 'NumPredictorsToSample', 5);
+treeModel = TreeBagger(9, trainingFeatures, trainingLabels, 'Method', 'classification');
+
+toc
+
+% tic
+% treeModel = TreeBagger(30, trainingFeatures, trainingLabels, 'OOBPred', 'on', 'Options', paroptions);
+% toc
 % methods(treeModel)
 predictedlabel = predict(treeModel, testfeature);
 
