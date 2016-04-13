@@ -45,7 +45,7 @@ hogFeatureSize = length(hog_4x4);
 
 trainingFeatures = [];
 trainingLabels   = [];
-
+tic
 for pic = 1:numel(trainingSets)
 
     numImages = trainingSets(pic).Count;
@@ -65,8 +65,11 @@ for pic = 1:numel(trainingSets)
     trainingFeatures = [trainingFeatures; features];
     trainingLabels = [trainingLabels; labels];
 end
+toc
 
+tic
 classifier = fitcecoc(trainingFeatures, trainingLabels);
+toc
 % categoryClassifier = trainImageCategoryClassifier(trainingSets, trainingFeatures);
 % confMatrix = evaluate(categoryClassifier, testSets)
 % testpic = imread('http://d111vui60acwyt.cloudfront.net/product_photos/3169638/Profile(1)_original.jpg');%cup
