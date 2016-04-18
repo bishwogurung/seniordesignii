@@ -2,6 +2,27 @@
 %We are trying to show how any particular image can be categorized. 
 
 %%
+%takes a snapshot with webcam 
+
+webcamlist
+cam = webcam
+%tells you about the webcam
+
+preview(cam)
+pause(2)
+closePreview(cam)
+%opens the camera so you can see it
+%then closes it
+
+img1 = snapshot(cam);
+imshow(img1)
+%takes a picture with the camera 
+
+     imwrite(img1,'img1.jpg','jpg')
+
+clear('cam');
+%saves the image just taken
+%%
 %We are using Caltech 101 image data set for our reference pictures.
 
 url = 'http://www.vision.caltech.edu/Image_Datasets/Caltech101/101_ObjectCategories.tar.gz';
@@ -27,9 +48,9 @@ rootFolder = fullfile(outputFolder, '101_ObjectCategories');
 %We selected 3 categories from Caltech 101 by using imageset which pulls
 %the right amount of files needed.
 
-imgSets = [ imageSet(fullfile(rootFolder, 'starfish')), ...
+imgSets = [ imageSet(fullfile(rootFolder, 'watch')), ...
             imageSet(fullfile(rootFolder, 'dollar_bill')), ...
-            imageSet(fullfile(rootFolder, 'cup')) ];
+            imageSet(fullfile(rootFolder, 'umbrella')) ];
 %we used the starfish, rhino, cup categories from the caltech database. 
 
 %%
@@ -56,7 +77,7 @@ imgSets = partition(imgSets, minSetCount, 'randomize');
 
 %%
 %separating training and validation information.
-%.3 is used for traing; .7 is for validation
+%.3 is used for training; .7 is for validation
 
 [trainingSets, validationSets] = partition(imgSets, 0.3, 'randomize');
 %using partition method here again. 
@@ -64,20 +85,20 @@ imgSets = partition(imgSets, minSetCount, 'randomize');
 %%
 %displaying our three categories 
 
-starfish = read(trainingSets(1),1);
+watch = read(trainingSets(1),1);
 dollar_bill    = read(trainingSets(2),1);
-cup      = read(trainingSets(3),1);
+umbrella     = read(trainingSets(3),1);
 
 figure
 
 subplot(1,3,1);
-imshow(starfish)
+imshow(watch)
 hold on
 subplot(1,3,2);
 imshow(dollar_bill)
 hold on
 subplot(1,3,3);
-imshow(cup)
+imshow(umbrella)
 %we are using subplots to put all three categories images into one figure.
 
 %% 
@@ -118,27 +139,7 @@ confMatrix = evaluate(categoryClassifier, validationSets);
 mean(diag(confMatrix));
 %finds the amount of accuracy
 
-%%
-%takes a snapshot with webcam 
 
-webcamlist
-cam = webcam
-%tells you about the webcam
-
-preview(cam)
-pause(2)
-closePreview(cam)
-%opens the camera so you can see it
-%then closes it
-
-img1 = snapshot(cam);
-imshow(img1)
-%takes a picture with the camera 
-
-     imwrite(img1,'img1.jpg','jpg')
-
-clear('cam');
-%saves the image just taken
 %%
 %testing a image to see how the program works
 
