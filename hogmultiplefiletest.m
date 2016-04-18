@@ -11,7 +11,7 @@ format compact;
  listOfFolderNames = {};
  
  while true
-     [singleSubFolder, remain] = strtok(remain, ';');
+     [singleSubFolder, remain] = strtok(remain, ';'); 
      if isempty(singleSubFolder)
          break;
      end

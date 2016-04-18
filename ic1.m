@@ -15,6 +15,7 @@ closePreview(cam)
 %then closes it
 
 img1 = snapshot(cam);
+figure
 imshow(img1)
 %takes a picture with the camera 
 
@@ -113,11 +114,11 @@ img = read(imgSets(1), 1);
 featureVector = encode(bag, img);
 %counts how many features are in an image 
 
-figure
-bar(featureVector)
-title('image word occurrences')
-xlabel('image word index')
-ylabel('number of repetitions')
+% figure
+% bar(featureVector)
+% title('image word occurrences')
+% xlabel('image word index')
+% ylabel('number of repetitions')
 %histogram of image word occurrences to show for the images
 %gives an idea for training a classifier 
 

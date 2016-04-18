@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 %%
 %We are using Caltech 101 image data set for our reference pictures.
 
@@ -15,6 +16,9 @@ end
 
 
 rootFolder = fullfile(outputFolder, '101_ObjectCategories');
+=======
+rootFolder = fullfile('/Users/Bishwo/Downloads/101_ObjectCategories');
+>>>>>>> faa04ab4d957ced937d41bb787168105acff0aee
 
 imgSets = [ imageSet(fullfile(rootFolder, 'airplanes')), ...
             imageSet(fullfile(rootFolder, 'cup')), ...
@@ -61,7 +65,11 @@ hogFeatureSize = length(hog_4x4);
 
 trainingFeatures = [];
 trainingLabels   = [];
+<<<<<<< HEAD
 
+=======
+tic
+>>>>>>> faa04ab4d957ced937d41bb787168105acff0aee
 for pic = 1:numel(trainingSets)
 
     numImages = trainingSets(pic).Count;
@@ -81,8 +89,16 @@ for pic = 1:numel(trainingSets)
     trainingFeatures = [trainingFeatures; features];
     trainingLabels = [trainingLabels; labels];
 end
+<<<<<<< HEAD
 
 classifier = fitcecoc(trainingFeatures, trainingLabels);
+=======
+toc
+
+tic
+classifier = fitcecoc(trainingFeatures, trainingLabels);
+toc
+>>>>>>> faa04ab4d957ced937d41bb787168105acff0aee
 % categoryClassifier = trainImageCategoryClassifier(trainingSets, trainingFeatures);
 % confMatrix = evaluate(categoryClassifier, testSets)
 % testpic = imread('http://d111vui60acwyt.cloudfront.net/product_photos/3169638/Profile(1)_original.jpg');%cup
@@ -91,7 +107,11 @@ classifier = fitcecoc(trainingFeatures, trainingLabels);
 % testpic = imread('http://cdn.history.com/sites/2/2013/12/egyptian-pyramids-hero-H.jpeg'); %pyramid
 % testpic = imread('test_image5.jpeg'); %pyramids
 % testpic = imread('img2.jpg');
+<<<<<<< HEAD
 testpic = imread('test_image1.jpg');
+=======
+testpic = imread('test_image4.jpg');
+>>>>>>> faa04ab4d957ced937d41bb787168105acff0aee
 
 testpic = imresize(testpic, train_img_size);
 lvl = graythresh(testpic);
@@ -105,6 +125,7 @@ confMat = confusionmat(testlabel, predictedlabel);
 
 [c, order] = confusionmat(testlabel, predictedlabel);
 order{2}
+<<<<<<< HEAD
 % answer = ['say ' order{2}];
 % system(answer);
 % clearvars
@@ -119,3 +140,8 @@ NET.addAssembly('System.Speech');
 obj = System.Speech.Synthesis.SpeechSynthesizer;
 obj.Volume = 100;
 Speak(obj, caUserInput);
+=======
+answer = ['say ' order{2}];
+system(answer);
+% clearvars
+>>>>>>> faa04ab4d957ced937d41bb787168105acff0aee

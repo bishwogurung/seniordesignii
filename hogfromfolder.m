@@ -1,7 +1,7 @@
 clearvars
 
 % Assign the image folder you want to use (keep it small because it will display all of them as figures)
-starfishpath = 'C:/Users/James/Documents/MATLAB/101_ObjectCategories/starfish2';
+starfishpath = 'C:\Users\Shona\Desktop\seniordesignii\starfish';
 
 % Read all the images
 filenames = dir(fullfile(starfishpath, '*.jpg'));
