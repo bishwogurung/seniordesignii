@@ -1,5 +1,5 @@
 clearvars
-my_dir = '/Users/Bishwo/Downloads/101_objectcategories/';
+my_dir = '/Users/Bishwo/Documents/102_objectcategories/animals/';
 imgSets = imageSet(fullfile(my_dir), 'recursive');
 % imgSets=imageSet(fullfile(my_dir));
                
@@ -75,7 +75,8 @@ toc
 % testpic = imread('img2.jpg');
 
 % testpic = imread('ENTER URL HERE');
-pic = 'test_image1.jpg';
+pic = 'http://images.dailystar.co.uk/dynamic/1/photos/306000/Shawn-Hanson-cougar-Dachshund-dog-puppy-Salmon-Beach-British-Columbia-257306.jpg'; %ant
+% pic = 'ant2.jpg';
 testpic = imread(pic); %dollar bill
 
 testpic = imresize(testpic, train_img_size);
@@ -93,14 +94,27 @@ order{2}
 answer = ['say ' order{2}];
 system(answer);
 % clearvars
-
+system('say Is this correct?');
 confirm = input('Is this correct? (Enter y for yes or n for no):', 's');
 if confirm == 'n'
+    system('say What is the correct class for this object?');
     correct_answer = input('What is the correct class for this object? ', 's');
+    
+    %saving url content to current directory with a shorter name
+    [str, status] = urlread(pic);
+    if status
+        url = pic;
+        filename = 'testing_url_pic.jpg';
+        outfilename = websave(filename, url);
+        pic = filename;
+    else
+        disp('error');
+    end
+    
     target_location = strcat(my_dir,correct_answer);
     if exist(target_location, 'file')~=7
         mkdir(target_location)
-        for i=1:3
+        for i=1:20
 %             display(target_location)
             copyfile(pic, [strcat(target_location, '/'), 'testimage_', num2str(i), '.jpg']);
         end
@@ -108,6 +122,9 @@ if confirm == 'n'
         for i=1:20
             copyfile(pic, [strcat(target_location, '/'), 'testimage_', num2str(i), '.jpg']);
         end
-        display('Thank you for your input. Now, please run the program to try again.')
     end
+ 
+    display('Thank you for your input. Now, please run the program to try again.')
+    system('say Thank you for your input. Now, please run the program to try again.');
+    
 end    

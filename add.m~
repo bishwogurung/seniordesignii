@@ -70,8 +70,7 @@ picz = 'test_image1.jpg';
 % if status
 if status
 else
-    disp('error');
-end
+    disp('error
 % else
 %     disp('error');
 % end
@@ -81,6 +80,6 @@ end
 %     display('error');
 % end
 
-% url = pic;
-% filename = 'testing_url_pic.jpg';
-% outfilename = websave(filename, url);
+url = pic;
+filename = 'testing_url_pic.jpg';
+outfilename = websave(filename, url);
