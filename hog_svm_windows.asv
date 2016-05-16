@@ -1,5 +1,5 @@
 clearvars
-my_dir = '/C:/Users/Shona/Desktop/seniordesignii/animals';
+my_dir = '\Users\Shona\Desktop\seniordesignii\animals\birds\';
 
 imgSets = imageSet(fullfile(my_dir), 'recursive');
 % imgSets=imageSet(fullfile(my_dir));
@@ -21,7 +21,6 @@ imgSets = imageSet(fullfile(my_dir), 'recursive');
 %      imwrite(img2,'img2.jpg','jpg');
 % 
 % clear('cam');
-
 
 minSetCount = min([imgSets.Count]);
 
@@ -90,15 +89,22 @@ testlabel = cellstr(testlabel);
 predictedlabel = predict(classifier, testfeature);
 confMat = confusionmat(testlabel, predictedlabel);
 
+
+obj = System.Speech.Synthesis.SpeechSynthesizer;
+obj.Volume = 100;
+NET.addAssembly('System.Speech');
+
 [c, order] = confusionmat(testlabel, predictedlabel);
 solution = order{2}
-answer = ['say ' order{2}];
-system(answer);
+Speak(obj, solution)
+
+%answer = ['say ' order{2}];
+%system(answer);
 % clearvars
 %system('say Is this correct?');
 
 systemtalk =('Is this correct?');
-speak(obj, systemtalk)
+Speak(obj, systemtalk)
 
 confirm = input('Is this correct? (Enter y for yes or n for no):', 's');
 if confirm == 'n'
@@ -112,16 +118,7 @@ Speak(obj, Correct_answer);
   %MACLINE  system('say What is the correct class for this object?');
   %MACLINE  correct_answer = input('What is the correct class for this object? ', 's');
   %__________________________________________________________________
-  
-  
-  caUserInput = ('Is this correct?'); % Convert from cell to string.
-NET.addAssembly('System.Speech');
-obj = System.Speech.Synthesis.SpeechSynthesizer;
-obj.Volume = 100;
-Speak(obj, caUserInput);
 
-  %__________________________________________________________________
-  
     %saving url content to current directory with a shorter name
     [str, status] = urlread(pic);
     if status
@@ -147,6 +144,10 @@ Speak(obj, caUserInput);
     end
  
     display('Thank you for your input. Now, please run the program to try again.')
-    system('say Thank you for your input. Now, please run the program to try again.');
+    %system('say Thank you for your input. Now, please run the program to try again.')
+    
+    FInput = ('Thank you for your input. Now, please run the program to try again.')
+    Speak(obj, FInput);
+     
     
 end    

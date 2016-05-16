@@ -96,7 +96,7 @@ NET.addAssembly('System.Speech');
 
 [c, order] = confusionmat(testlabel, predictedlabel);
 solution = order{2}
-speak(obj, solution)
+Speak(obj, solution)
 
 %answer = ['say ' order{2}];
 %system(answer);
@@ -104,7 +104,7 @@ speak(obj, solution)
 %system('say Is this correct?');
 
 systemtalk =('Is this correct?');
-speak(obj, systemtalk)
+Speak(obj, systemtalk)
 
 confirm = input('Is this correct? (Enter y for yes or n for no):', 's');
 if confirm == 'n'
@@ -112,7 +112,7 @@ if confirm == 'n'
   
 UserInput = ('What is the correct class for this object?'); %text to be spoken
 Speak(obj, UserInput);
-Correct_answer = ('What is the correct class for this object?');
+Correct_answer = input('What is the correct class for this object?', 's');
 Speak(obj, Correct_answer);
   %__________________________________________________________________
   %MACLINE  system('say What is the correct class for this object?');
