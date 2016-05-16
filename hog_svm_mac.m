@@ -1,5 +1,5 @@
 clearvars
-my_dir = '/Users/Bishwo/Documents/102_objectcategories/animals/';
+my_dir = '/animals/';
 imgSets = imageSet(fullfile(my_dir), 'recursive');
 % imgSets=imageSet(fullfile(my_dir));
                

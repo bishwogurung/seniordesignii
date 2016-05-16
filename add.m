@@ -62,16 +62,16 @@ my_dir = '/Users/Bishwo/Downloads/10_object_categories/';
 
 % pic = 'http://animaliaz-life.com/image.php?pic=/data_images/ant/ant2.jpg'; %this one did not work
 % % testpic = imread(pic);
-pic = 'https://scjdmcdn.azureedge.net/~/media/raid/bugs/ants/carpenter-ants/carpenter-ant-top-v.png?la=en-US&hash=073D486F8B069202E2E381A30F44155AE93DC639';
-% testpic = imread(pic);
-% copyfile(pic, [strcat(target_location, '/'), 'testimage_', num2str(i), '.jpg']);
-picz = 'test_image1.jpg';
-[str, status] = urlread(picz);
+% pic = 'https://scjdmcdn.azureedge.net/~/media/raid/bugs/ants/carpenter-ants/carpenter-ant-top-v.png?la=en-US&hash=073D486F8B069202E2E381A30F44155AE93DC639';
+% % testpic = imread(pic);
+% % copyfile(pic, [strcat(target_location, '/'), 'testimage_', num2str(i), '.jpg']);
+% picz = 'test_image1.jpg';
+% [str, status] = urlread(picz);
+% % if status
 % if status
-if status
-else
-    disp('error');
-end
+% else
+%     disp('error');
+% end
 % else
 %     disp('error');
 % end
@@ -84,3 +84,5 @@ end
 % url = pic;
 % filename = 'testing_url_pic.jpg';
 % outfilename = websave(filename, url);
+
+listing = dir('/Users/Bishwo/Documents/102_objectcategories/animals/')
