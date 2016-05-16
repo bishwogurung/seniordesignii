@@ -1,5 +1,5 @@
 clearvars
-my_dir = '/C:/Users/Shona/Desktop/seniordesignii/animals';
+my_dir = '\Users\Shona\Desktop\seniordesignii\animals\birds\';
 
 imgSets = imageSet(fullfile(my_dir), 'recursive');
 % imgSets=imageSet(fullfile(my_dir));
@@ -21,7 +21,6 @@ imgSets = imageSet(fullfile(my_dir), 'recursive');
 %      imwrite(img2,'img2.jpg','jpg');
 % 
 % clear('cam');
-
 
 minSetCount = min([imgSets.Count]);
 
@@ -90,9 +89,15 @@ testlabel = cellstr(testlabel);
 predictedlabel = predict(classifier, testfeature);
 confMat = confusionmat(testlabel, predictedlabel);
 
+
+obj = System.Speech.Synthesis.SpeechSynthesizer;
+obj.Volume = 100;
+NET.addAssembly('System.Speech');
+
 [c, order] = confusionmat(testlabel, predictedlabel);
 solution = order{2}
 speak(obj, solution)
+
 %answer = ['say ' order{2}];
 %system(answer);
 % clearvars
