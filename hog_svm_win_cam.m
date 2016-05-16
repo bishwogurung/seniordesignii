@@ -1,27 +1,37 @@
 clearvars
-my_dir = '\Users\Shona\Desktop\seniordesignii\animals\common_items\';
+my_dir = '\Users\Shona\Desktop\seniordesignii\common_items\';
 
 imgSets = imageSet(fullfile(my_dir), 'recursive');
 % imgSets=imageSet(fullfile(my_dir));
-               
-% webcamlist;
-% cam = webcam;
-% %tells you about the webcam
-% 
-% preview(cam)
-% pause(2)
-% closePreview(cam)
-% %opens the camera so you can see it
-% %then closes it
-% 
-% img2 = snapshot(cam);
-% imshow(img2)
-% %takes a picture with the camera 
-% 
-%      imwrite(img2,'img2.jpg','jpg');
-% 
-% clear('cam');
 
+
+obj = System.Speech.Synthesis.SpeechSynthesizer;
+obj.Volume = 100;
+NET.addAssembly('System.Speech');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%               
+cam1 =('Please get ready to hold up the object.');
+Speak(obj, cam1)
+
+webcamlist;
+cam = webcam;
+%tells you about the webcam
+
+preview(cam)
+pause(3)
+closePreview(cam)
+%opens the camera so you can see it
+%then closes it
+
+img2 = snapshot(cam);
+imshow(img2)
+%takes a picture with the camera 
+
+     imwrite(img2,'img2.jpg','jpg');
+
+clear('cam');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 minSetCount = min([imgSets.Count]);
 
 imgSets = partition(imgSets, minSetCount, 'randomize');
@@ -75,8 +85,10 @@ toc
 % testpic = imread('img2.jpg');
 
 % testpic = imread('ENTER URL HERE');
-pic = 'http://images.dailystar.co.uk/dynamic/1/photos/306000/Shawn-Hanson-cougar-Dachshund-dog-puppy-Salmon-Beach-British-Columbia-257306.jpg'; %ant
+%pic = 'http://images.dailystar.co.uk/dynamic/1/photos/306000/Shawn-Hanson-cougar-Dachshund-dog-puppy-Salmon-Beach-British-Columbia-257306.jpg'; %ant
 % pic = 'ant2.jpg';
+
+pic = 'img2.jpg';
 testpic = imread(pic); %dollar bill
 
 testpic = imresize(testpic, train_img_size);
@@ -88,11 +100,6 @@ testlabel = cellstr(testlabel);
 
 predictedlabel = predict(classifier, testfeature);
 confMat = confusionmat(testlabel, predictedlabel);
-
-
-obj = System.Speech.Synthesis.SpeechSynthesizer;
-obj.Volume = 100;
-NET.addAssembly('System.Speech');
 
 [c, order] = confusionmat(testlabel, predictedlabel);
 solution = order{2}
