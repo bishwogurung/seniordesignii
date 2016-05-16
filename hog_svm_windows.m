@@ -91,11 +91,13 @@ predictedlabel = predict(classifier, testfeature);
 confMat = confusionmat(testlabel, predictedlabel);
 
 [c, order] = confusionmat(testlabel, predictedlabel);
-order{2}
-answer = ['say ' order{2}];
-system(answer);
+solution = order{2}
+speak(obj, solution)
+%answer = ['say ' order{2}];
+%system(answer);
 % clearvars
 %system('say Is this correct?');
+
 systemtalk =('Is this correct?');
 speak(obj, systemtalk)
 
@@ -111,16 +113,7 @@ Speak(obj, Correct_answer);
   %MACLINE  system('say What is the correct class for this object?');
   %MACLINE  correct_answer = input('What is the correct class for this object? ', 's');
   %__________________________________________________________________
-  
-  
-  caUserInput = ('Is this correct?'); % Convert from cell to string.
-NET.addAssembly('System.Speech');
-obj = System.Speech.Synthesis.SpeechSynthesizer;
-obj.Volume = 100;
-Speak(obj, caUserInput);
 
-  %__________________________________________________________________
-  
     %saving url content to current directory with a shorter name
     [str, status] = urlread(pic);
     if status
@@ -146,6 +139,10 @@ Speak(obj, caUserInput);
     end
  
     display('Thank you for your input. Now, please run the program to try again.')
-    system('say Thank you for your input. Now, please run the program to try again.');
+    %system('say Thank you for your input. Now, please run the program to try again.')
+    
+    FInput = ('Thank you for your input. Now, please run the program to try again.')
+    Speak(obj, FInput);
+     
     
 end    
