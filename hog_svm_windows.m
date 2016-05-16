@@ -112,8 +112,8 @@ if confirm == 'n'
   
 UserInput = ('What is the correct class for this object?'); %text to be spoken
 Speak(obj, UserInput);
-Correct_answer = input('What is the correct class for this object?', 's');
-Speak(obj, Correct_answer);
+correct_answer = input('What is the correct class for this object?', 's');
+
   %__________________________________________________________________
   %MACLINE  system('say What is the correct class for this object?');
   %MACLINE  correct_answer = input('What is the correct class for this object? ', 's');
