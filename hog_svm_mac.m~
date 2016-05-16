@@ -1,15 +1,5 @@
-%%listing all the folders within a directory
-% listing = dir('animals/');
-% Folders = listing(~strncmpi('.', {listing.name}, 1));
-% sub_categories = {Folders.name}
-
-
 clearvars
-<<<<<<< HEAD
-my_dir = '/Users/Bishwo/Documents/102_objectcategories/animals/';
-=======
-my_dir = 'animals/other_animals/';
->>>>>>> 8587d2db6893a61b0c6518d24cabc6f22c6a1337
+my_dir = '/animals/';
 imgSets = imageSet(fullfile(my_dir), 'recursive');
 % imgSets=imageSet(fullfile(my_dir));
                
@@ -37,7 +27,7 @@ minSetCount = min([imgSets.Count]);
 imgSets = partition(imgSets, minSetCount, 'randomize');
 
 % [trainingSets, testSets] = partition(imgSets, 0.6, 'randomize');
-trainingSets = partition(imgSets, .8, 'randomize');
+trainingSets = partition(imgSets, 0.5, 'randomize');
 
 img = read(trainingSets(1), 2);
 train_img_size = [size(img, 1), size(img, 2)];
@@ -85,10 +75,8 @@ toc
 % testpic = imread('img2.jpg');
 
 % testpic = imread('ENTER URL HERE');
-% pic = 'http://images.dailystar.co.uk/dynamic/1/photos/306000/Shawn-Hanson-cougar-Dachshund-dog-puppy-Salmon-Beach-British-Columbia-257306.jpg'; %ant
+pic = 'http://images.dailystar.co.uk/dynamic/1/photos/306000/Shawn-Hanson-cougar-Dachshund-dog-puppy-Salmon-Beach-British-Columbia-257306.jpg'; %ant
 % pic = 'ant2.jpg';
-% pic = (ENTER PIC OR URL HERE); 
-pic = 'http://www.rosecityhedgehogs.com/uploads/ppet1_1456179c.jpg';
 testpic = imread(pic); %dollar bill
 
 testpic = imresize(testpic, train_img_size);
