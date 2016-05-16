@@ -1,5 +1,6 @@
 clearvars
-my_dir = '/Users/Bishwo/Documents/102_objectcategories/animals/';
+my_dir = '/C:/Users/Shona/Desktop/seniordesignii/animals';
+
 imgSets = imageSet(fullfile(my_dir), 'recursive');
 % imgSets=imageSet(fullfile(my_dir));
                
@@ -94,12 +95,32 @@ order{2}
 answer = ['say ' order{2}];
 system(answer);
 % clearvars
-system('say Is this correct?');
+%system('say Is this correct?');
+systemtalk =('Is this correct?');
+speak(obj, systemtalk)
+
 confirm = input('Is this correct? (Enter y for yes or n for no):', 's');
 if confirm == 'n'
-    system('say What is the correct class for this object?');
-    correct_answer = input('What is the correct class for this object? ', 's');
-    
+  %__________________________________________________________________
+  
+UserInput = ('What is the correct class for this object?'); %text to be spoken
+Speak(obj, UserInput);
+Correct_answer = ('What is the correct class for this object?');
+Speak(obj, Correct_answer);
+  %__________________________________________________________________
+  %MACLINE  system('say What is the correct class for this object?');
+  %MACLINE  correct_answer = input('What is the correct class for this object? ', 's');
+  %__________________________________________________________________
+  
+  
+  caUserInput = ('Is this correct?'); % Convert from cell to string.
+NET.addAssembly('System.Speech');
+obj = System.Speech.Synthesis.SpeechSynthesizer;
+obj.Volume = 100;
+Speak(obj, caUserInput);
+
+  %__________________________________________________________________
+  
     %saving url content to current directory with a shorter name
     [str, status] = urlread(pic);
     if status

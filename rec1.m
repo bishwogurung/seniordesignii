@@ -9,4 +9,3 @@ play(recObj);
 y = getaudiodata(recObj);
 plot(y);
 
-

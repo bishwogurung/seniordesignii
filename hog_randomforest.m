@@ -28,11 +28,12 @@ imgSets = [ imageSet(fullfile(rootFolder, 'airplanes')), ...
 % clear('cam');
 
 
-minSetCount = min([imgSets.Count]);
+% minSetCount = min([imgSets.Count]);
+minSetCount = 10;
 
 imgSets = partition(imgSets, minSetCount, 'randomize');
 
-[trainingSets, testSets] = partition(imgSets, 0.7, 'randomize');
+[trainingSets, testSets] = partition(imgSets, 0.6, 'randomize');
 
 img = read(trainingSets(1), 2);
 train_img_size = [size(img, 1), size(img, 2)];
@@ -72,8 +73,8 @@ end
 % testpic = imread('http://d111vui60acwyt.cloudfront.net/product_photos/3169638/Profile(1)_original.jpg');%cup
 % testpic = imread('http://thumbs.dreamstime.com/z/caribbean-starfish-26107095.jpg');%starfish
 % testpic = imread('test_image1.jpg'); %starfish
-% testpic = imread('http://cdn.history.com/sites/2/2013/12/egyptian-pyramids-hero-H.jpeg'); %pyramid
-testpic = imread('test_image5.jpeg'); %pyramids
+testpic = imread('http://cdn.history.com/sites/2/2013/12/egyptian-pyramids-hero-H.jpeg'); %pyramid
+% testpic = imread('test_image5.jpeg'); %pyramids
 % testpic = imread('img2.jpg'); %dollar-bill snapshot from webcam
 % testpic = imread('test_image1.jpg');
 
@@ -84,17 +85,15 @@ testpic = im2bw(testpic, lvl);
 testlabel = 'answer';
 testlabel = cellstr(testlabel);
 
-% paroptions = statset('UseParallel', true);
+paroptions = statset('UseParallel', true);
+
 tic
-% treeModel = TreeBagger(30, trainingFeatures, trainingLabels, 'NumPredictorsToSample', 5);
-treeModel = TreeBagger(9, trainingFeatures, trainingLabels, 'Method', 'classification');
-
+treeModel = TreeBagger(30, trainingFeatures, trainingLabels, 'Method', 'classification', 'Options', paroptions);                                                                                                              
 toc
-
+% delete(gcp('nocreate')) %terminates current parpool session
 % tic
-% treeModel = TreeBagger(30, trainingFeatures, trainingLabels, 'OOBPred', 'on', 'Options', paroptions);
+% treeModel = TreeBagger(20, trainingFeatures, trainingLabels, 'Method', 'classification');                                                                                                               
 % toc
-% methods(treeModel)
 predictedlabel = predict(treeModel, testfeature);
 
 % predictedlabel = predict(classifier, testfeature);
