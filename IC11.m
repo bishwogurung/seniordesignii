@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 %Image category classification with bag of features
 %We are trying to show how any particular image can be categorized. 
 
@@ -148,7 +147,7 @@ mean(diag(confMatrix));
 img = imread('img1.jpg');
 [labelIdx, scores] = predict(categoryClassifier, img);
 categoryClassifier.Labels(labelIdx)
-=======
+
 %Image category classification with bag of features
 %We are trying to show how any particular image can be categorized. 
 
@@ -303,5 +302,4 @@ categoryClassifier.Labels(labelIdx)
 % answ = categoryClassifier.Labels(labelIdx);
 % answer = ['say ' answ];
 % system(answer);
->>>>>>> faa04ab4d957ced937d41bb787168105acff0aee
 %gives more information about the image

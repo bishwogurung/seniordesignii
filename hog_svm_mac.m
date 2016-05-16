@@ -1,34 +1,8 @@
-<<<<<<< HEAD
-%%
-%We are using Caltech 101 image data set for our reference pictures.
-
-url = 'http://www.vision.caltech.edu/Image_Datasets/Caltech101/101_ObjectCategories.tar.gz';
-%using the link from the internet 
-
-outputFolder = fullfile(tempdir, 'caltech101'); 
-%downloading the caltech files 
-
-if ~exist(outputFolder, 'dir') 
-    disp('Downloading 126MB Caltech101 data set...');
-    untar(url, outputFolder);
-end
-%'if' loop incase we re-run our code, this should download the images only once
-
-
-rootFolder = fullfile(outputFolder, '101_ObjectCategories');
-=======
-rootFolder = fullfile('/Users/Bishwo/Downloads/101_ObjectCategories');
->>>>>>> faa04ab4d957ced937d41bb787168105acff0aee
-
-imgSets = [ imageSet(fullfile(rootFolder, 'airplanes')), ...
-            imageSet(fullfile(rootFolder, 'cup')), ...
-            imageSet(fullfile(rootFolder, 'ferry')), ...
-            imageSet(fullfile(rootFolder, 'dollar_bill')) ...
-            imageSet(fullfile(rootFolder, 'pyramid')), ...
-            imageSet(fullfile(rootFolder, 'starfish')) ]; 
-
-% imgSets = imageSet(rootFolder);
-        
+clearvars
+my_dir = '/Users/Bishwo/Documents/102_objectcategories/animals/';
+imgSets = imageSet(fullfile(my_dir), 'recursive');
+% imgSets=imageSet(fullfile(my_dir));
+               
 % webcamlist;
 % cam = webcam;
 % %tells you about the webcam
@@ -52,7 +26,8 @@ minSetCount = min([imgSets.Count]);
 
 imgSets = partition(imgSets, minSetCount, 'randomize');
 
-[trainingSets, testSets] = partition(imgSets, 0.6, 'randomize');
+% [trainingSets, testSets] = partition(imgSets, 0.6, 'randomize');
+trainingSets = partition(imgSets, 0.5, 'randomize');
 
 img = read(trainingSets(1), 2);
 train_img_size = [size(img, 1), size(img, 2)];
@@ -65,11 +40,7 @@ hogFeatureSize = length(hog_4x4);
 
 trainingFeatures = [];
 trainingLabels   = [];
-<<<<<<< HEAD
-
-=======
 tic
->>>>>>> faa04ab4d957ced937d41bb787168105acff0aee
 for pic = 1:numel(trainingSets)
 
     numImages = trainingSets(pic).Count;
@@ -89,16 +60,11 @@ for pic = 1:numel(trainingSets)
     trainingFeatures = [trainingFeatures; features];
     trainingLabels = [trainingLabels; labels];
 end
-<<<<<<< HEAD
-
-classifier = fitcecoc(trainingFeatures, trainingLabels);
-=======
 toc
 
 tic
 classifier = fitcecoc(trainingFeatures, trainingLabels);
 toc
->>>>>>> faa04ab4d957ced937d41bb787168105acff0aee
 % categoryClassifier = trainImageCategoryClassifier(trainingSets, trainingFeatures);
 % confMatrix = evaluate(categoryClassifier, testSets)
 % testpic = imread('http://d111vui60acwyt.cloudfront.net/product_photos/3169638/Profile(1)_original.jpg');%cup
@@ -107,11 +73,11 @@ toc
 % testpic = imread('http://cdn.history.com/sites/2/2013/12/egyptian-pyramids-hero-H.jpeg'); %pyramid
 % testpic = imread('test_image5.jpeg'); %pyramids
 % testpic = imread('img2.jpg');
-<<<<<<< HEAD
-testpic = imread('test_image1.jpg');
-=======
-testpic = imread('test_image4.jpg');
->>>>>>> faa04ab4d957ced937d41bb787168105acff0aee
+
+% testpic = imread('ENTER URL HERE');
+pic = 'http://images.dailystar.co.uk/dynamic/1/photos/306000/Shawn-Hanson-cougar-Dachshund-dog-puppy-Salmon-Beach-British-Columbia-257306.jpg'; %ant
+% pic = 'ant2.jpg';
+testpic = imread(pic); %dollar bill
 
 testpic = imresize(testpic, train_img_size);
 lvl = graythresh(testpic);
@@ -125,23 +91,40 @@ confMat = confusionmat(testlabel, predictedlabel);
 
 [c, order] = confusionmat(testlabel, predictedlabel);
 order{2}
-<<<<<<< HEAD
-% answer = ['say ' order{2}];
-% system(answer);
-% clearvars
-
-%%%%%%%%%
-%windows text to speech addition 
-if isempty(predictedlabel)
-	return;
-end; 
-caUserInput = char(predictedlabel); % Convert from cell to string.
-NET.addAssembly('System.Speech');
-obj = System.Speech.Synthesis.SpeechSynthesizer;
-obj.Volume = 100;
-Speak(obj, caUserInput);
-=======
 answer = ['say ' order{2}];
 system(answer);
 % clearvars
->>>>>>> faa04ab4d957ced937d41bb787168105acff0aee
+system('say Is this correct?');
+confirm = input('Is this correct? (Enter y for yes or n for no):', 's');
+if confirm == 'n'
+    system('say What is the correct class for this object?');
+    correct_answer = input('What is the correct class for this object? ', 's');
+    
+    %saving url content to current directory with a shorter name
+    [str, status] = urlread(pic);
+    if status
+        url = pic;
+        filename = 'testing_url_pic.jpg';
+        outfilename = websave(filename, url);
+        pic = filename;
+    else
+        disp('error');
+    end
+    
+    target_location = strcat(my_dir,correct_answer);
+    if exist(target_location, 'file')~=7
+        mkdir(target_location)
+        for i=1:20
+%             display(target_location)
+            copyfile(pic, [strcat(target_location, '/'), 'testimage_', num2str(i), '.jpg']);
+        end
+    else
+        for i=1:20
+            copyfile(pic, [strcat(target_location, '/'), 'testimage_', num2str(i), '.jpg']);
+        end
+    end
+ 
+    display('Thank you for your input. Now, please run the program to try again.')
+    system('say Thank you for your input. Now, please run the program to try again.');
+    
+end    
