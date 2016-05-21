@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 %code to play an audio file
 %the file name can be replaced with any .wav file
 %%
@@ -12,28 +11,3 @@ sound(y,Fs);
 %%
 %uncomment either one of them to play the audio file
 
-
- 
-
-
-
-=======
-%code to play an audio file
-%the file name can be replaced with any .wav file
-%%
-%Version 1
-[y,Fs] = audioread('sound.wav');
-sound(y,Fs);
-%%
-%Version 2
-%audioread('sound.wav');
-%sound(audioread('sound.wav'),50000)
-%%
-%uncomment either one of them to play the audio file
-
-
- 
-
-
-
->>>>>>> 01257c78c8b82c10c59048e7dd5e156f3825ce2a

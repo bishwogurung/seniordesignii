@@ -134,7 +134,7 @@ correct_answer = input('What is the correct class for this object?', 's');
         outfilename = websave(filename, url);
         pic = filename;
     else
-        disp('error');
+        %disp('error');
     end
     
     target_location = strcat(my_dir,correct_answer);
